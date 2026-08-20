@@ -15,7 +15,7 @@ html {
 body {
     font-family: Arial, Helvetica, sans-serif;
     background: #ffffff;
-    color: #333333;
+    color: #2D3436;
     line-height: 1.6;
 }
 
@@ -29,7 +29,7 @@ a {
 /* ========================================= */
 
 .main-header {
-    background: #111827;
+    background: #16324F;
     color: white;
 
     min-height: 90px;
@@ -50,17 +50,36 @@ a {
             rgba(0, 0, 0, 0.20);
 }
 
-.logo h1 {
-    font-size: 25px;
-    line-height: 1.2;
+
+/* ========================================= */
+/* LOGO                                      */
+/* ========================================= */
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
 }
 
-.logo span {
-    font-size: 12px;
+.header-logo {
+    width: 115px;
+    height: 85px;
 
-    color: #f59e0b;
+    object-fit: contain;
 
-    letter-spacing: 1px;
+    display: block;
+
+    border-radius: 4px;
+
+    transition:
+            transform 0.3s ease,
+            filter 0.3s ease;
+}
+
+.header-logo:hover {
+    transform: scale(1.04);
+    filter: brightness(1.08);
 }
 
 .main-header nav {
@@ -81,11 +100,11 @@ a {
 }
 
 .main-header nav a:hover {
-    color: #f59e0b;
+    color: #D99A3E;
 }
 
 .header-phone {
-    background: #f59e0b;
+    background: #D99A3E;
 
     color: white;
 
@@ -101,7 +120,7 @@ a {
 }
 
 .header-phone:hover {
-    background: #d97706;
+    background: #B97824;
 }
 
 
@@ -116,7 +135,7 @@ a {
 
     color: white;
 
-    border: 2px solid #f59e0b;
+    border: 2px solid #D99A3E;
 
     border-radius: 5px;
 
@@ -137,8 +156,8 @@ a {
 
     background:
             linear-gradient(
-                    rgba(0, 0, 0, 0.60),
-                    rgba(0, 0, 0, 0.60)
+                    rgba(11, 31, 51, 0.68),
+                    rgba(11, 31, 51, 0.68)
             ),
             url("../images/hero.jpg");
 
@@ -162,7 +181,7 @@ a {
 .hero-small-title {
     display: inline-block;
 
-    color: #f59e0b;
+    color: #D99A3E;
 
     font-weight: bold;
 
@@ -220,13 +239,13 @@ a {
 }
 
 .btn-primary {
-    background: #f59e0b;
+    background: #D99A3E;
 
     color: white;
 }
 
 .btn-primary:hover {
-    background: #d97706;
+    background: #B97824;
 
     transform: translateY(-2px);
 }
@@ -240,7 +259,7 @@ a {
 .btn-secondary:hover {
     background: white;
 
-    color: #111827;
+    color: #16324F;
 }
 
 
@@ -262,7 +281,7 @@ section {
 
 .section-title span,
 .small-title {
-    color: #f59e0b;
+    color: #D99A3E;
 
     font-weight: bold;
 
@@ -274,13 +293,13 @@ section {
 .section-title h2 {
     font-size: 40px;
 
-    color: #111827;
+    color: #16324F;
 
     margin: 10px 0 15px;
 }
 
 .section-title p {
-    color: #666666;
+    color: #5F6B73;
 
     font-size: 18px;
 }
@@ -308,7 +327,7 @@ section {
 }
 
 .service {
-    background: #f9fafb;
+    background: #F5F7F8;
 
     padding: 35px 25px;
 
@@ -318,7 +337,7 @@ section {
 
     transition: 0.3s;
 
-    border: 1px solid #eeeeee;
+    border: 1px solid #E3E8EC;
 }
 
 .service:hover {
@@ -326,7 +345,7 @@ section {
 
     box-shadow:
             0 12px 30px
-            rgba(0, 0, 0, 0.12);
+            rgba(22, 50, 79, 0.15);
 }
 
 .service-icon {
@@ -338,13 +357,13 @@ section {
 .service h3 {
     font-size: 22px;
 
-    color: #111827;
+    color: #16324F;
 
     margin-bottom: 15px;
 }
 
 .service p {
-    color: #666666;
+    color: #5F6B73;
 
     line-height: 1.6;
 }
@@ -355,7 +374,7 @@ section {
 /* ========================================= */
 
 .projects-section {
-    background: #f3f4f6;
+    background: #EEF2F5;
 }
 
 .project-filters {
@@ -373,9 +392,9 @@ section {
 .filter-btn {
     background: white;
 
-    color: #111827;
+    color: #16324F;
 
-    border: 2px solid #e5e7eb;
+    border: 2px solid #D7DEE4;
 
     padding: 11px 22px;
 
@@ -391,17 +410,17 @@ section {
 }
 
 .filter-btn:hover {
-    border-color: #f59e0b;
+    border-color: #D99A3E;
 
-    color: #f59e0b;
+    color: #D99A3E;
 }
 
 .filter-btn.active {
-    background: #f59e0b;
+    background: #D99A3E;
 
     color: white;
 
-    border-color: #f59e0b;
+    border-color: #D99A3E;
 }
 
 .projects-grid {
@@ -426,7 +445,7 @@ section {
 
     box-shadow:
             0 5px 20px
-            rgba(0, 0, 0, 0.10);
+            rgba(22, 50, 79, 0.10);
 
     transition:
             transform 0.3s,
@@ -438,7 +457,7 @@ section {
 
     box-shadow:
             0 15px 35px
-            rgba(0, 0, 0, 0.18);
+            rgba(22, 50, 79, 0.18);
 }
 
 .project-card.hidden {
@@ -468,7 +487,7 @@ section {
 }
 
 .project-info span {
-    color: #f59e0b;
+    color: #D99A3E;
 
     font-size: 13px;
 
@@ -482,7 +501,7 @@ section {
 .project-info h3 {
     margin-top: 7px;
 
-    color: #111827;
+    color: #16324F;
 
     font-size: 20px;
 }
@@ -506,7 +525,7 @@ section {
     height: 100%;
 
     background:
-            rgba(0, 0, 0, 0.92);
+            rgba(11, 31, 51, 0.95);
 
     justify-content: center;
     align-items: center;
@@ -545,7 +564,7 @@ section {
 }
 
 .close-modal:hover {
-    color: #f59e0b;
+    color: #D99A3E;
 }
 
 .modal-arrow {
@@ -557,7 +576,7 @@ section {
             translateY(-50%);
 
     background:
-            rgba(0, 0, 0, 0.5);
+            rgba(22, 50, 79, 0.70);
 
     color: white;
 
@@ -575,7 +594,7 @@ section {
 }
 
 .modal-arrow:hover {
-    background: #f59e0b;
+    background: #D99A3E;
 }
 
 .modal-left {
@@ -609,7 +628,7 @@ section {
 }
 
 .video-card {
-    background: #f9fafb;
+    background: #F5F7F8;
 
     border-radius: 12px;
 
@@ -617,7 +636,7 @@ section {
 
     box-shadow:
             0 8px 25px
-            rgba(0, 0, 0, 0.10);
+            rgba(22, 50, 79, 0.10);
 }
 
 .video-card video {
@@ -629,13 +648,13 @@ section {
 
     display: block;
 
-    background: #000000;
+    background: #0B1F33;
 }
 
 .video-card h3 {
     padding: 20px;
 
-    color: #111827;
+    color: #16324F;
 
     text-align: center;
 }
@@ -646,7 +665,7 @@ section {
 /* ========================================= */
 
 .about-section {
-    background: #f3f4f6;
+    background: #EEF2F5;
 }
 
 .about-content {
@@ -660,7 +679,7 @@ section {
 .about-text h2 {
     font-size: 40px;
 
-    color: #111827;
+    color: #16324F;
 
     margin: 10px 0 25px;
 }
@@ -670,7 +689,7 @@ section {
 
     margin: 0 auto 15px;
 
-    color: #666666;
+    color: #5F6B73;
 
     font-size: 18px;
 }
@@ -697,7 +716,9 @@ section {
 
     font-weight: bold;
 
-    color: #111827;
+    color: #16324F;
+
+    border-left: 4px solid #D99A3E;
 }
 
 
@@ -714,7 +735,7 @@ section {
 
     margin: auto;
 
-    background: #f9fafb;
+    background: #F5F7F8;
 
     text-align: center;
 
@@ -722,11 +743,11 @@ section {
 
     border-radius: 12px;
 
-    border: 1px solid #eeeeee;
+    border: 1px solid #E3E8EC;
 
     box-shadow:
             0 5px 20px
-            rgba(0, 0, 0, 0.08);
+            rgba(22, 50, 79, 0.08);
 }
 
 .area-icon {
@@ -738,13 +759,13 @@ section {
 .area-main h3 {
     font-size: 25px;
 
-    color: #111827;
+    color: #16324F;
 
     margin-bottom: 5px;
 }
 
 .area-main p {
-    color: #666666;
+    color: #5F6B73;
 
     font-size: 17px;
 }
@@ -755,7 +776,7 @@ section {
 /* ========================================= */
 
 .contact-section {
-    background: #f3f4f6;
+    background: #EEF2F5;
 }
 
 .contact-container {
@@ -778,13 +799,13 @@ section {
 .contact-info h3 {
     font-size: 30px;
 
-    color: #111827;
+    color: #16324F;
 
     margin-bottom: 15px;
 }
 
 .contact-info > p {
-    color: #666666;
+    color: #5F6B73;
 
     margin-bottom: 30px;
 
@@ -796,25 +817,25 @@ section {
 }
 
 .contact-item strong {
-    color: #111827;
+    color: #16324F;
 
     font-size: 17px;
 }
 
 .contact-item p {
-    color: #666666;
+    color: #5F6B73;
 
     margin-top: 5px;
 }
 
 .contact-item a {
-    color: #666666;
+    color: #5F6B73;
 
     text-decoration: none;
 }
 
 .contact-item a:hover {
-    color: #f59e0b;
+    color: #D99A3E;
 }
 
 
@@ -831,7 +852,7 @@ form {
 
     box-shadow:
             0 10px 30px
-            rgba(0, 0, 0, 0.08);
+            rgba(22, 50, 79, 0.08);
 
     display: flex;
 
@@ -843,7 +864,7 @@ form {
 form label {
     font-weight: bold;
 
-    color: #333333;
+    color: #2D3436;
 
     margin-top: 5px;
 }
@@ -857,7 +878,7 @@ select {
 
     font-size: 16px;
 
-    border: 1px solid #cccccc;
+    border: 1px solid #C9D1D8;
 
     border-radius: 5px;
 
@@ -872,7 +893,11 @@ textarea:focus,
 select:focus {
     outline: none;
 
-    border-color: #f59e0b;
+    border-color: #D99A3E;
+
+    box-shadow:
+            0 0 0 3px
+            rgba(217, 154, 62, 0.15);
 }
 
 textarea {
@@ -882,7 +907,7 @@ textarea {
 }
 
 form button {
-    background: #f59e0b;
+    background: #D99A3E;
 
     color: white;
 
@@ -904,7 +929,9 @@ form button {
 }
 
 form button:hover {
-    background: #d97706;
+    background: #B97824;
+
+    transform: translateY(-2px);
 }
 
 
@@ -913,7 +940,7 @@ form button:hover {
 /* ========================================= */
 
 .cta-section {
-    background: #111827;
+    background: #16324F;
 
     color: white;
 
@@ -931,7 +958,7 @@ form button:hover {
 .cta-section p {
     font-size: 19px;
 
-    color: #d1d5db;
+    color: #DCE4EA;
 
     margin-bottom: 30px;
 }
@@ -942,7 +969,7 @@ form button:hover {
 /* ========================================= */
 
 footer {
-    background: #080d16;
+    background: #0B1F33;
 
     color: white;
 
@@ -968,7 +995,7 @@ footer {
 }
 
 .footer-content p {
-    color: #aaaaaa;
+    color: #BFCAD2;
 
     font-size: 14px;
 }
@@ -1070,12 +1097,9 @@ footer {
         flex: 1;
     }
 
-    .logo h1 {
-        font-size: 20px;
-    }
-
-    .logo span {
-        font-size: 10px;
+    .header-logo {
+        width: 90px;
+        height: 68px;
     }
 
     .menu-toggle {
@@ -1094,7 +1118,7 @@ footer {
         margin-top: 15px;
 
         border-top:
-                1px solid #374151;
+                1px solid #294B68;
     }
 
     .main-header nav.active {
@@ -1109,11 +1133,13 @@ footer {
         text-align: center;
 
         border-bottom:
-                1px solid #374151;
+                1px solid #294B68;
     }
 
     .main-header nav a:hover {
-        background: #1f2937;
+        background: #0B1F33;
+
+        color: #D99A3E;
     }
 
     .header-phone {

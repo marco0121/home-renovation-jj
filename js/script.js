@@ -65,73 +65,165 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ========================================
-    // PROJECT FILTERS
+    // ACTIVE MENU ON SCROLL
     // ========================================
 
-    const filterButtons =
-        document.querySelectorAll(".filter-btn");
+    const sections =
+        document.querySelectorAll(
+            "section[id]"
+        );
 
-    const projectCards =
-        document.querySelectorAll(".project-card");
-
-
-    filterButtons.forEach(function (button) {
-
-        button.addEventListener(
-            "click",
-            function () {
-
-                const selectedFilter =
-                    button.getAttribute("data-filter");
+    const navigationLinks =
+        document.querySelectorAll(
+            "#mainNav a"
+        );
 
 
-                filterButtons.forEach(
-                    function (btn) {
+    function updateActiveMenu() {
 
-                        btn.classList.remove("active");
+        let currentSection = "";
 
-                    }
+        sections.forEach(function (section) {
+
+            const sectionTop =
+                section.offsetTop - 180;
+
+            const sectionHeight =
+                section.offsetHeight;
+
+
+            if (
+                window.scrollY >= sectionTop &&
+                window.scrollY <
+                sectionTop + sectionHeight
+            ) {
+
+                currentSection =
+                    section.getAttribute("id");
+
+            }
+
+        });
+
+
+        navigationLinks.forEach(
+            function (link) {
+
+                link.classList.remove(
+                    "active-link"
                 );
 
 
-                button.classList.add("active");
+                const href =
+                    link.getAttribute("href");
 
 
-                projectCards.forEach(
-                    function (card) {
+                if (
+                    href ===
+                    "#" + currentSection
+                ) {
 
-                        const categories =
-                            card.getAttribute(
-                                "data-category"
-                            );
+                    link.classList.add(
+                        "active-link"
+                    );
 
-
-                        if (
-                            selectedFilter === "all" ||
-                            categories.includes(
-                                selectedFilter
-                            )
-                        ) {
-
-                            card.classList.remove(
-                                "hidden"
-                            );
-
-                        } else {
-
-                            card.classList.add(
-                                "hidden"
-                            );
-
-                        }
-
-                    }
-                );
+                }
 
             }
         );
 
-    });
+    }
+
+
+    window.addEventListener(
+        "scroll",
+        updateActiveMenu
+    );
+
+
+    updateActiveMenu();
+
+
+    // ========================================
+    // PROJECT FILTERS
+    // ========================================
+
+    const filterButtons =
+        document.querySelectorAll(
+            ".filter-btn"
+        );
+
+    const projectCards =
+        document.querySelectorAll(
+            ".project-card"
+        );
+
+
+    filterButtons.forEach(
+        function (button) {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    const selectedFilter =
+                        button.getAttribute(
+                            "data-filter"
+                        );
+
+
+                    filterButtons.forEach(
+                        function (btn) {
+
+                            btn.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+
+                    button.classList.add(
+                        "active"
+                    );
+
+
+                    projectCards.forEach(
+                        function (card) {
+
+                            const categories =
+                                card.getAttribute(
+                                    "data-category"
+                                );
+
+
+                            if (
+                                selectedFilter === "all" ||
+                                categories.includes(
+                                    selectedFilter
+                                )
+                            ) {
+
+                                card.classList.remove(
+                                    "hidden"
+                                );
+
+                            } else {
+
+                                card.classList.add(
+                                    "hidden"
+                                );
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+    );
 
 
     // ========================================
@@ -139,19 +231,29 @@ document.addEventListener("DOMContentLoaded", function () {
     // ========================================
 
     const modal =
-        document.getElementById("imageModal");
+        document.getElementById(
+            "imageModal"
+        );
 
     const modalImage =
-        document.getElementById("modalImage");
+        document.getElementById(
+            "modalImage"
+        );
 
     const closeModal =
-        document.getElementById("closeModal");
+        document.getElementById(
+            "closeModal"
+        );
 
     const previousButton =
-        document.getElementById("previousImage");
+        document.getElementById(
+            "previousImage"
+        );
 
     const nextButton =
-        document.getElementById("nextImage");
+        document.getElementById(
+            "nextImage"
+        );
 
 
     let currentImageIndex = 0;
@@ -176,8 +278,12 @@ document.addEventListener("DOMContentLoaded", function () {
         updateVisibleImages();
 
 
-        if (visibleImages.length === 0) {
+        if (
+            visibleImages.length === 0
+        ) {
+
             return;
+
         }
 
 
@@ -189,33 +295,46 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        if (index >= visibleImages.length) {
+        if (
+            index >=
+            visibleImages.length
+        ) {
 
             index = 0;
 
         }
 
 
-        currentImageIndex = index;
+        currentImageIndex =
+            index;
 
 
-        modalImage.src =
-            visibleImages[
-                currentImageIndex
-                ].src;
+        if (
+            modalImage &&
+            modal
+        ) {
+
+            modalImage.src =
+                visibleImages[
+                    currentImageIndex
+                    ].src;
 
 
-        modalImage.alt =
-            visibleImages[
-                currentImageIndex
-                ].alt;
+            modalImage.alt =
+                visibleImages[
+                    currentImageIndex
+                    ].alt;
 
 
-        modal.classList.add("active");
+            modal.classList.add(
+                "active"
+            );
 
 
-        document.body.style.overflow =
-            "hidden";
+            document.body.style.overflow =
+                "hidden";
+
+        }
 
     }
 
@@ -228,31 +347,37 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-        images.forEach(function (image) {
+        images.forEach(
+            function (image) {
 
-            image.addEventListener(
-                "click",
-                function () {
+                image.addEventListener(
+                    "click",
+                    function () {
 
-                    updateVisibleImages();
-
-
-                    const index =
-                        visibleImages.indexOf(
-                            image
-                        );
+                        updateVisibleImages();
 
 
-                    if (index !== -1) {
+                        const index =
+                            visibleImages.indexOf(
+                                image
+                            );
 
-                        showImage(index);
+
+                        if (
+                            index !== -1
+                        ) {
+
+                            showImage(
+                                index
+                            );
+
+                        }
 
                     }
+                );
 
-                }
-            );
-
-        });
+            }
+        );
 
     }
 
@@ -262,7 +387,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function closeImageModal() {
 
-        modal.classList.remove("active");
+        if (!modal) {
+
+            return;
+
+        }
+
+
+        modal.classList.remove(
+            "active"
+        );
+
 
         document.body.style.overflow =
             "";
@@ -318,7 +453,9 @@ document.addEventListener("DOMContentLoaded", function () {
             "click",
             function (event) {
 
-                if (event.target === modal) {
+                if (
+                    event.target === modal
+                ) {
 
                     closeImageModal();
 
@@ -336,7 +473,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (
                 !modal ||
-                !modal.classList.contains("active")
+                !modal.classList.contains(
+                    "active"
+                )
             ) {
 
                 return;
@@ -344,14 +483,19 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
 
-            if (event.key === "Escape") {
+            if (
+                event.key === "Escape"
+            ) {
 
                 closeImageModal();
 
             }
 
 
-            if (event.key === "ArrowRight") {
+            if (
+                event.key ===
+                "ArrowRight"
+            ) {
 
                 showImage(
                     currentImageIndex + 1
@@ -360,7 +504,10 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
 
-            if (event.key === "ArrowLeft") {
+            if (
+                event.key ===
+                "ArrowLeft"
+            ) {
 
                 showImage(
                     currentImageIndex - 1
@@ -377,7 +524,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // ========================================
 
     const estimateForm =
-        document.getElementById("estimateForm");
+        document.getElementById(
+            "estimateForm"
+        );
 
 
     if (estimateForm) {
@@ -391,34 +540,44 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 const name =
                     document
-                        .getElementById("name")
+                        .getElementById(
+                            "name"
+                        )
                         .value
                         .trim();
 
 
                 const phone =
                     document
-                        .getElementById("phone")
+                        .getElementById(
+                            "phone"
+                        )
                         .value
                         .trim();
 
 
                 const email =
                     document
-                        .getElementById("email")
+                        .getElementById(
+                            "email"
+                        )
                         .value
                         .trim();
 
 
                 const service =
                     document
-                        .getElementById("service")
+                        .getElementById(
+                            "service"
+                        )
                         .value;
 
 
                 const message =
                     document
-                        .getElementById("message")
+                        .getElementById(
+                            "message"
+                        )
                         .value
                         .trim();
 
@@ -428,17 +587,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     "\n\nI would like to request a free estimate." +
 
-                    "\n\nName: " + name +
+                    "\n\nName: " +
+                    name +
 
-                    "\nPhone: " + phone +
+                    "\nPhone: " +
+                    phone +
 
-                    "\nEmail: " + email +
+                    "\nEmail: " +
+                    email +
 
-                    "\nService: " + service +
+                    "\nService: " +
+                    service +
 
                     "\n\nProject Details:" +
 
-                    "\n" + message;
+                    "\n" +
+                    message;
 
 
                 const encodedMessage =
@@ -467,5 +631,6 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
     }
+
 
 });

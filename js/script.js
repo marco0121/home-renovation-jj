@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 mainNav.classList.toggle("active");
 
+
                 const isOpen =
                     mainNav.classList.contains("active");
 
@@ -32,6 +33,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 menuToggle.textContent =
                     isOpen ? "✕" : "☰";
+
+
+                document.body.classList.toggle(
+                    "menu-open",
+                    isOpen
+                );
 
             }
         );
@@ -49,11 +56,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     mainNav.classList.remove("active");
 
+
                     menuToggle.textContent = "☰";
+
 
                     menuToggle.setAttribute(
                         "aria-expanded",
                         "false"
+                    );
+
+
+                    document.body.classList.remove(
+                        "menu-open"
                     );
 
                 }
@@ -63,85 +77,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-
-    // ========================================
-    // ACTIVE MENU ON SCROLL
-    // ========================================
-
-    const sections =
-        document.querySelectorAll(
-            "section[id]"
-        );
-
-    const navigationLinks =
-        document.querySelectorAll(
-            "#mainNav a"
-        );
-
-
-    function updateActiveMenu() {
-
-        let currentSection = "";
-
-        sections.forEach(function (section) {
-
-            const sectionTop =
-                section.offsetTop - 180;
-
-            const sectionHeight =
-                section.offsetHeight;
-
-
-            if (
-                window.scrollY >= sectionTop &&
-                window.scrollY <
-                sectionTop + sectionHeight
-            ) {
-
-                currentSection =
-                    section.getAttribute("id");
-
-            }
-
-        });
-
-
-        navigationLinks.forEach(
-            function (link) {
-
-                link.classList.remove(
-                    "active-link"
-                );
-
-
-                const href =
-                    link.getAttribute("href");
-
-
-                if (
-                    href ===
-                    "#" + currentSection
-                ) {
-
-                    link.classList.add(
-                        "active-link"
-                    );
-
-                }
-
-            }
-        );
-
-    }
-
-
-    window.addEventListener(
-        "scroll",
-        updateActiveMenu
-    );
-
-
-    updateActiveMenu();
 
 
     // ========================================
@@ -149,227 +84,57 @@ document.addEventListener("DOMContentLoaded", function () {
     // ========================================
 
     const filterButtons =
-        document.querySelectorAll(
-            ".filter-btn"
-        );
+        document.querySelectorAll(".filter-btn");
+
 
     const projectCards =
-        document.querySelectorAll(
-            ".project-card"
-        );
+        document.querySelectorAll(".project-card");
 
 
-    filterButtons.forEach(
-        function (button) {
+    filterButtons.forEach(function (button) {
 
-            button.addEventListener(
-                "click",
-                function () {
 
-                    const selectedFilter =
-                        button.getAttribute(
-                            "data-filter"
-                        );
+        button.addEventListener(
+            "click",
+            function () {
 
 
-                    filterButtons.forEach(
-                        function (btn) {
+                filterButtons.forEach(
+                    function (btn) {
 
-                            btn.classList.remove(
-                                "active"
-                            );
+                        btn.classList.remove("active");
 
-                        }
-                    );
+                    }
+                );
 
 
-                    button.classList.add(
-                        "active"
-                    );
+                button.classList.add("active");
 
 
-                    projectCards.forEach(
-                        function (card) {
+                const selectedFilter =
+                    button.getAttribute("data-filter");
 
-                            const categories =
-                                card.getAttribute(
-                                    "data-category"
-                                );
 
+                projectCards.forEach(
+                    function (card) {
 
-                            if (
-                                selectedFilter === "all" ||
-                                categories.includes(
-                                    selectedFilter
-                                )
-                            ) {
 
-                                card.classList.remove(
-                                    "hidden"
-                                );
-
-                            } else {
-
-                                card.classList.add(
-                                    "hidden"
-                                );
-
-                            }
-
-                        }
-                    );
-
-                }
-            );
-
-        }
-    );
-
-
-    // ========================================
-    // IMAGE GALLERY
-    // ========================================
-
-    const modal =
-        document.getElementById(
-            "imageModal"
-        );
-
-    const modalImage =
-        document.getElementById(
-            "modalImage"
-        );
-
-    const closeModal =
-        document.getElementById(
-            "closeModal"
-        );
-
-    const previousButton =
-        document.getElementById(
-            "previousImage"
-        );
-
-    const nextButton =
-        document.getElementById(
-            "nextImage"
-        );
-
-
-    let currentImageIndex = 0;
-
-    let visibleImages = [];
-
-
-    function updateVisibleImages() {
-
-        visibleImages =
-            Array.from(
-                document.querySelectorAll(
-                    ".project-card:not(.hidden) .project-image"
-                )
-            );
-
-    }
-
-
-    function showImage(index) {
-
-        updateVisibleImages();
-
-
-        if (
-            visibleImages.length === 0
-        ) {
-
-            return;
-
-        }
-
-
-        if (index < 0) {
-
-            index =
-                visibleImages.length - 1;
-
-        }
-
-
-        if (
-            index >=
-            visibleImages.length
-        ) {
-
-            index = 0;
-
-        }
-
-
-        currentImageIndex =
-            index;
-
-
-        if (
-            modalImage &&
-            modal
-        ) {
-
-            modalImage.src =
-                visibleImages[
-                    currentImageIndex
-                    ].src;
-
-
-            modalImage.alt =
-                visibleImages[
-                    currentImageIndex
-                    ].alt;
-
-
-            modal.classList.add(
-                "active"
-            );
-
-
-            document.body.style.overflow =
-                "hidden";
-
-        }
-
-    }
-
-
-    function attachImageEvents() {
-
-        const images =
-            document.querySelectorAll(
-                ".project-image"
-            );
-
-
-        images.forEach(
-            function (image) {
-
-                image.addEventListener(
-                    "click",
-                    function () {
-
-                        updateVisibleImages();
-
-
-                        const index =
-                            visibleImages.indexOf(
-                                image
-                            );
+                        const categories =
+                            card
+                                .getAttribute("data-category")
+                                .split(" ");
 
 
                         if (
-                            index !== -1
+                            selectedFilter === "all" ||
+                            categories.includes(selectedFilter)
                         ) {
 
-                            showImage(
-                                index
-                            );
+                            card.classList.remove("hidden");
+
+                        } else {
+
+                            card.classList.add("hidden");
 
                         }
 
@@ -379,30 +144,153 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         );
 
-    }
+    });
 
 
-    attachImageEvents();
+
+    // ========================================
+    // IMAGE MODAL
+    // ========================================
+
+    const modal =
+        document.getElementById("imageModal");
 
 
-    function closeImageModal() {
+    const modalImage =
+        document.getElementById("modalImage");
 
-        if (!modal) {
+
+    const closeModal =
+        document.getElementById("closeModal");
+
+
+    const previousImage =
+        document.getElementById("previousImage");
+
+
+    const nextImage =
+        document.getElementById("nextImage");
+
+
+    const galleryImages =
+        Array.from(
+            document.querySelectorAll(".project-image")
+        );
+
+
+    let currentImageIndex = 0;
+
+
+
+    function openImage(index) {
+
+        if (
+            !modal ||
+            !modalImage ||
+            galleryImages.length === 0
+        ) {
 
             return;
 
         }
 
 
-        modal.classList.remove(
-            "active"
+        currentImageIndex = index;
+
+
+        modalImage.src =
+            galleryImages[currentImageIndex].src;
+
+
+        modalImage.alt =
+            galleryImages[currentImageIndex].alt;
+
+
+        modal.classList.add("active");
+
+
+        document.body.classList.add(
+            "modal-open"
         );
 
+    }
 
-        document.body.style.overflow =
-            "";
+
+
+    function closeImageModal() {
+
+        if (!modal) {
+            return;
+        }
+
+
+        modal.classList.remove("active");
+
+
+        document.body.classList.remove(
+            "modal-open"
+        );
 
     }
+
+
+
+    function showPreviousImage() {
+
+        currentImageIndex--;
+
+
+        if (currentImageIndex < 0) {
+
+            currentImageIndex =
+                galleryImages.length - 1;
+
+        }
+
+
+        openImage(currentImageIndex);
+
+    }
+
+
+
+    function showNextImage() {
+
+        currentImageIndex++;
+
+
+        if (
+            currentImageIndex >=
+            galleryImages.length
+        ) {
+
+            currentImageIndex = 0;
+
+        }
+
+
+        openImage(currentImageIndex);
+
+    }
+
+
+
+    galleryImages.forEach(
+        function (image, index) {
+
+
+            image.addEventListener(
+                "click",
+                function () {
+
+                    openImage(index);
+
+                }
+            );
+
+        }
+    );
+
 
 
     if (closeModal) {
@@ -415,36 +303,27 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    if (nextButton) {
 
-        nextButton.addEventListener(
+    if (previousImage) {
+
+        previousImage.addEventListener(
             "click",
-            function () {
-
-                showImage(
-                    currentImageIndex + 1
-                );
-
-            }
+            showPreviousImage
         );
 
     }
 
 
-    if (previousButton) {
 
-        previousButton.addEventListener(
+    if (nextImage) {
+
+        nextImage.addEventListener(
             "click",
-            function () {
-
-                showImage(
-                    currentImageIndex - 1
-                );
-
-            }
+            showNextImage
         );
 
     }
+
 
 
     if (modal) {
@@ -453,9 +332,8 @@ document.addEventListener("DOMContentLoaded", function () {
             "click",
             function (event) {
 
-                if (
-                    event.target === modal
-                ) {
+
+                if (event.target === modal) {
 
                     closeImageModal();
 
@@ -467,15 +345,19 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+
+    // ========================================
+    // KEYBOARD CONTROLS FOR MODAL
+    // ========================================
+
     document.addEventListener(
         "keydown",
         function (event) {
 
+
             if (
                 !modal ||
-                !modal.classList.contains(
-                    "active"
-                )
+                !modal.classList.contains("active")
             ) {
 
                 return;
@@ -483,35 +365,23 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
 
-            if (
-                event.key === "Escape"
-            ) {
+            if (event.key === "Escape") {
 
                 closeImageModal();
 
             }
 
 
-            if (
-                event.key ===
-                "ArrowRight"
-            ) {
+            if (event.key === "ArrowLeft") {
 
-                showImage(
-                    currentImageIndex + 1
-                );
+                showPreviousImage();
 
             }
 
 
-            if (
-                event.key ===
-                "ArrowLeft"
-            ) {
+            if (event.key === "ArrowRight") {
 
-                showImage(
-                    currentImageIndex - 1
-                );
+                showNextImage();
 
             }
 
@@ -519,8 +389,50 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 
+
     // ========================================
-    // FREE ESTIMATE FORM -> WHATSAPP
+    // ONLY ONE VIDEO AT A TIME
+    // ========================================
+
+    const videos =
+        document.querySelectorAll(
+            ".video-card video"
+        );
+
+
+    videos.forEach(function (video) {
+
+
+        video.addEventListener(
+            "play",
+            function () {
+
+
+                videos.forEach(
+                    function (otherVideo) {
+
+
+                        if (
+                            otherVideo !== video &&
+                            !otherVideo.paused
+                        ) {
+
+                            otherVideo.pause();
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+    });
+
+
+
+    // ========================================
+    // ESTIMATE FORM -> WHATSAPP
     // ========================================
 
     const estimateForm =
@@ -529,103 +441,248 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
+    const formMessage =
+        document.getElementById(
+            "formMessage"
+        );
+
+
     if (estimateForm) {
+
 
         estimateForm.addEventListener(
             "submit",
             function (event) {
+
 
                 event.preventDefault();
 
 
                 const name =
                     document
-                        .getElementById(
-                            "name"
-                        )
+                        .getElementById("name")
                         .value
                         .trim();
 
 
                 const phone =
                     document
-                        .getElementById(
-                            "phone"
-                        )
+                        .getElementById("phone")
                         .value
                         .trim();
 
 
                 const email =
                     document
-                        .getElementById(
-                            "email"
-                        )
+                        .getElementById("email")
                         .value
                         .trim();
 
 
                 const service =
                     document
-                        .getElementById(
-                            "service"
-                        )
+                        .getElementById("service")
                         .value;
 
 
                 const message =
                     document
-                        .getElementById(
-                            "message"
-                        )
+                        .getElementById("message")
                         .value
                         .trim();
 
 
-                const whatsappMessage =
-                    "Hello Home Renovation JJ!" +
 
-                    "\n\nI would like to request a free estimate." +
-
-                    "\n\nName: " +
-                    name +
-
-                    "\nPhone: " +
-                    phone +
-
-                    "\nEmail: " +
-                    email +
-
-                    "\nService: " +
-                    service +
-
-                    "\n\nProject Details:" +
-
-                    "\n" +
-                    message;
+                if (
+                    name === "" ||
+                    phone === "" ||
+                    email === "" ||
+                    service === "" ||
+                    message === ""
+                ) {
 
 
-                const encodedMessage =
-                    encodeURIComponent(
-                        whatsappMessage
-                    );
+                    if (formMessage) {
+
+                        formMessage.textContent =
+                            "Please complete all fields.";
+
+                    }
+
+
+                    return;
+
+                }
+
 
 
                 const whatsappNumber =
-                    "15596301452";
+                    "15596031452";
+
+
+
+                const whatsappMessage =
+                    "Hello Home Renovation JJ!" +
+                    "\n\n" +
+                    "I would like to request a free estimate." +
+                    "\n\n" +
+                    "Name: " + name +
+                    "\n" +
+                    "Phone: " + phone +
+                    "\n" +
+                    "Email: " + email +
+                    "\n" +
+                    "Service: " + service +
+                    "\n\n" +
+                    "Project Details:" +
+                    "\n" +
+                    message;
+
 
 
                 const whatsappURL =
                     "https://wa.me/" +
                     whatsappNumber +
                     "?text=" +
-                    encodedMessage;
+                    encodeURIComponent(
+                        whatsappMessage
+                    );
+
+
+
+                if (formMessage) {
+
+                    formMessage.textContent =
+                        "Opening WhatsApp...";
+
+                }
+
 
 
                 window.open(
                     whatsappURL,
                     "_blank"
                 );
+
+            }
+        );
+
+    }
+
+
+
+    // ========================================
+    // CURRENT YEAR
+    // ========================================
+
+    const currentYear =
+        document.getElementById(
+            "currentYear"
+        );
+
+
+    if (currentYear) {
+
+        currentYear.textContent =
+            new Date().getFullYear();
+
+    }
+
+
+
+    // ========================================
+    // SMOOTH SCROLL
+    // ========================================
+
+    const internalLinks =
+        document.querySelectorAll(
+            'a[href^="#"]'
+        );
+
+
+    internalLinks.forEach(function (link) {
+
+
+        link.addEventListener(
+            "click",
+            function (event) {
+
+
+                const targetId =
+                    link.getAttribute("href");
+
+
+                if (
+                    !targetId ||
+                    targetId === "#"
+                ) {
+
+                    return;
+
+                }
+
+
+                const target =
+                    document.querySelector(
+                        targetId
+                    );
+
+
+                if (target) {
+
+
+                    event.preventDefault();
+
+
+                    target.scrollIntoView({
+
+                        behavior: "smooth",
+
+                        block: "start"
+
+                    });
+
+                }
+
+            }
+        );
+
+    });
+
+
+
+    // ========================================
+    // HEADER EFFECT ON SCROLL
+    // ========================================
+
+    const header =
+        document.querySelector(
+            ".main-header"
+        );
+
+
+    if (header) {
+
+
+        window.addEventListener(
+            "scroll",
+            function () {
+
+
+                if (window.scrollY > 30) {
+
+
+                    header.style.boxShadow =
+                        "0 6px 25px rgba(0,0,0,0.40)";
+
+
+                } else {
+
+
+                    header.style.boxShadow =
+                        "0 4px 20px rgba(0,0,0,0.25)";
+
+                }
 
             }
         );
